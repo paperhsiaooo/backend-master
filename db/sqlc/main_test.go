@@ -17,15 +17,18 @@ const (
 )
 
 var testQueries *Queries
+var testDB *pgx.Conn
 
 func TestMain(m *testing.M) {
 	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, dbSource)
+	var err error
+
+	testDB, err = pgx.Connect(ctx, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
 
-	testQueries = New(conn) // Pass conn as a pointer to DBTX
+	testQueries = New(testDB) // Pass conn as a pointer to DBTX
 
 	os.Exit(m.Run())
 }
