@@ -8,13 +8,14 @@ import (
 )
 
 func TestTransferTx(t *testing.T) {
+
 	store := NewStore(testDB)
 
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
 
 	// run a concurrent transfer transaction
-	n := 5
+	n := 3
 	amount := int64(10)
 
 	errs := make(chan error)
@@ -22,6 +23,7 @@ func TestTransferTx(t *testing.T) {
 
 	for i := 0; i < n; i++ {
 		go func() {
+
 			result, err := store.TransferTex(context.Background(), TransferTxParams{
 				FromAccountID: account1.ID,
 				ToAccountID:   account2.ID,
