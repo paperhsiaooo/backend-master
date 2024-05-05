@@ -29,6 +29,6 @@ type Transfer struct {
 	FromAccountID int64
 	ToAccountID   int64
 	// must be positive
-	Amount    int64
-	CreatedAt pgtype.Timestamp
+	Amount    	  int64
+	CreatedAt     pgtype.Timestamp
 }
